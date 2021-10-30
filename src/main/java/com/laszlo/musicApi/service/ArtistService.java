@@ -3,7 +3,6 @@ package com.laszlo.musicApi.service;
 import com.laszlo.musicApi.model.Artist;
 import com.laszlo.musicApi.model.Song;
 import com.laszlo.musicApi.repository.ArtistRepository;
-import com.laszlo.musicApi.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -48,8 +47,8 @@ public class ArtistService {
     public List<Artist> artistsByGenre(String genre) {
         List<Song> songListFromGenre = songService.songsByGenre(genre);
         return songListFromGenre.stream()
+                .filter(song -> song.getArtist() != null)
                 .map(song -> songArtistMatcherByName(song))
-                .filter(artist -> artist != null)
                 .collect(Collectors.toList());
     }
 
@@ -57,7 +56,7 @@ public class ArtistService {
         String artistNameOfSong = song.getArtist();
         List<Artist> artists = artistRepository.findAll();
         Optional<Artist> matchingArtist = artists.stream()
-                .filter(artist -> artistNameOfSong != null)
+                .filter(artist -> artist.getName() != null)
                 .filter(artist -> artistNameOfSong.toLowerCase().contains(artist.getName().toLowerCase()))
                 .findFirst();
         if (matchingArtist.isPresent()) {

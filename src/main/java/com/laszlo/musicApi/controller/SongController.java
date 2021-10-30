@@ -45,8 +45,13 @@ public class SongController {
         return songService.save(song);
     }
 
-    @GetMapping("/songByGenre/{genre}")
+    @GetMapping("/songsByGenre/{genre}")
     List<Song> songsByGenre(@PathVariable(value = "genre") String genre) {
         return songService.songsByGenre(genre);
+    }
+
+    @GetMapping("/songsByYear/{year}")
+    List<Song> songsByYear(@PathVariable(value = "year") String year) {
+        return songService.songsByYear(Integer.parseInt(year));
     }
 }

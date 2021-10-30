@@ -28,4 +28,7 @@ public class SongService {
                 .collect(Collectors.toList());
     }
 
+    public List<Song> songsByYear(int year){
+        return songRepository.findByYear(year);
+    }
 }
