@@ -1,21 +1,25 @@
 package com.laszlo.musicApi.service;
 
 import com.laszlo.musicApi.model.Artist;
+import com.laszlo.musicApi.model.Song;
 import com.laszlo.musicApi.repository.ArtistRepository;
+import com.laszlo.musicApi.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class ArtistService {
     private final ArtistRepository artistRepository;
+    private final SongService songService;
 
-    public ArtistService(ArtistRepository artistRepository) {
+    public ArtistService(ArtistRepository artistRepository,
+            SongService songService) {
         this.artistRepository = artistRepository;
+        this.songService = songService;
     }
 
     public Collection<Artist> findAll() {
@@ -39,5 +43,28 @@ public class ArtistService {
             return artist.get();
         }
         return null;
+    }
+
+    public List<Artist> artistsByGenre(String genre) {
+        List<Song> songListFromGenre = songService.songsByGenre(genre);
+        return songListFromGenre.stream()
+                .map(song -> songArtistMatcherByName(song))
+                .filter(artist -> artist != null)
+                .collect(Collectors.toList());
+    }
+
+    public Artist songArtistMatcherByName(Song song) {
+        String artistNameOfSong = song.getArtist();
+        List<Artist> artists = artistRepository.findAll();
+        Optional<Artist> matchingArtist = artists.stream()
+                .filter(artist -> artistNameOfSong != null)
+                .filter(artist -> artistNameOfSong.toLowerCase().contains(artist.getName().toLowerCase()))
+                .findFirst();
+        if (matchingArtist.isPresent()) {
+            return matchingArtist.get();
+        }else{
+            System.out.println("Artist with 'song' : '" + song.toString() + "' not found");
+            return null;
+        }
     }
 }

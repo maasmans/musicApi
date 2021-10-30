@@ -31,8 +31,8 @@ public class ArtistController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<Artist>> getArtists() {
-        return new ResponseEntity(artistService.findAll(), HttpStatus.OK);
+    public Collection<Artist> getArtists() {
+        return artistService.findAll();
     }
 
     @PostMapping()
@@ -52,12 +52,12 @@ public class ArtistController {
         return artist;
     }
 
-//    @GetMapping("/artistByGenre/{genre}")
-//    public Set<Artist> getArtistsByGenre(@PathVariable(value = "genre") String genre){
-//        Set<Artist> artists = artistService.getArtistsByGenre(genre);
-//        for(Artist artist :artists) System.out.println(artist.Name);
-//        return artists;
-//    }
+    @GetMapping("/artistByGenre/{genre}")
+    public List<Artist> getArtistsByGenre(@PathVariable(value = "genre") String genre){
+        List<Artist> artists = artistService.artistsByGenre(genre);
+        return artists;
+    }
+
 //    @PostMapping("/fillDB")
 //    public ResponseEntity<List<Artist>> save(@RequestBody List<Artist> artists) {
 //        for(Artist artist : artists){
@@ -66,9 +66,4 @@ public class ArtistController {
 //        return ResponseEntity.status(HttpStatus.CREATED).body(artists);
 //    }
 
-    @GetMapping("/fillDB")
-    public void fillDB(){
-        //jsonService.fillDB();
-        System.out.println("works");
-    }
 }

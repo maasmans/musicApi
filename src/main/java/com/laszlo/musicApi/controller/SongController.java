@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/song")
@@ -25,9 +28,9 @@ public class SongController {
         this.songService = songService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Collection<Artist>> getSongs() {
-        return new ResponseEntity(songService.findAll(), HttpStatus.OK);
+    @GetMapping
+    public Collection<Song> getSongs() {
+        return songService.findAll();
     }
 
     @PostMapping(
@@ -38,7 +41,12 @@ public class SongController {
     }
 
     @DeleteMapping
-    ResponseEntity<Song> delete(@RequestBody Song song) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(songService.save(song));
+    Song delete(@RequestBody Song song) {
+        return songService.save(song);
+    }
+
+    @GetMapping("/songByGenre/{genre}")
+    List<Song> songsByGenre(@PathVariable(value = "genre") String genre) {
+        return songService.songsByGenre(genre);
     }
 }
