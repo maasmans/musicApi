@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.laszlo.musicApi.model.Artist;
-import com.laszlo.musicApi.model.JsonUtility;
+import utility.JsonUtility;
 import com.laszlo.musicApi.model.Song;
 import com.laszlo.musicApi.repository.ArtistRepository;
 import org.springframework.stereotype.Service;
@@ -45,13 +45,6 @@ public class ArtistService {
         return artistRepository.findByName(name);
     }
 
-    public Artist artistsById(int id) {
-        Optional<Artist> artist = artistRepository.findById(id);
-        if(artist.isPresent()){
-            return artist.get();
-        }
-        return null;
-    }
     /**
      * This one is a bit counter intuitive. You would expect that artists would have a genre. This is not the case so
      * this method gets all the songs that have the specified genre and returns the matching artists.
@@ -75,7 +68,6 @@ public class ArtistService {
         if (matchingArtist.isPresent()) {
             return matchingArtist.get();
         }else{
-            System.out.println("Artist with 'song' : '" + song.toString() + "' not found");
             return null;
         }
     }

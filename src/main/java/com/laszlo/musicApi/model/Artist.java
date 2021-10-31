@@ -25,8 +25,4 @@ public class Artist {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String toString(){
-        return id + " : " + name;
-    }
 }
