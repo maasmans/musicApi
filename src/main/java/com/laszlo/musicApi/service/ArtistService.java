@@ -60,7 +60,7 @@ public class ArtistService {
         return songListFromGenre.stream()
                 .filter(song -> song.getArtist() != null)
                 .map(song -> songArtistMatcherByName(song))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     public Artist songArtistMatcherByName(Song song) {
