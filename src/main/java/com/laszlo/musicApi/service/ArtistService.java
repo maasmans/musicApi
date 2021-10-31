@@ -5,9 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.laszlo.musicApi.model.Artist;
-import utility.JsonUtility;
 import com.laszlo.musicApi.model.Song;
 import com.laszlo.musicApi.repository.ArtistRepository;
+import com.laszlo.musicApi.utility.JsonUtility;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;

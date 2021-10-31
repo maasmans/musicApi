@@ -4,7 +4,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import utility.JsonUtility;
+import com.laszlo.musicApi.utility.JsonUtility;
 import com.laszlo.musicApi.model.Song;
 import com.laszlo.musicApi.repository.SongRepository;
 import org.springframework.stereotype.Service;
