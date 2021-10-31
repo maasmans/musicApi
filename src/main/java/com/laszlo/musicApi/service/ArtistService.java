@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,12 +56,13 @@ public class ArtistService {
      * This one is a bit counter intuitive. You would expect that artists would have a genre. This is not the case so
      * this method gets all the songs that have the specified genre and returns the matching artists.
      */
-    public List<Artist> artistsByGenre(String genre) {
+    public Set<Artist> artistsByGenre(String genre) {
         List<Song> songListFromGenre = songService.songsByGenre(genre);
         return songListFromGenre.stream()
                 .filter(song -> song.getArtist() != null)
                 .map(song -> songArtistMatcherByName(song))
-                .collect(Collectors.toList());
+                .filter(artist -> artist != null)
+                .collect(Collectors.toSet());
     }
 
     public Artist songArtistMatcherByName(Song song) {
