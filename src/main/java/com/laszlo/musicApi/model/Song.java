@@ -9,22 +9,22 @@ import javax.persistence.Id;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
-    private int year;
+    private Integer year;
     private String artist;
     private String shortname;
-    private int bpm;
-    private int duration;
+    private Integer bpm;
+    private Integer duration;
     private String genre;
     private String spotifyId;
     private String album;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,11 +36,11 @@ public class Song {
         this.name = name;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -60,19 +60,19 @@ public class Song {
         this.shortname = shortname;
     }
 
-    public int getBpm() {
+    public Integer getBpm() {
         return bpm;
     }
 
-    public void setBpm(int bpm) {
+    public void setBpm(Integer bpm) {
         this.bpm = bpm;
     }
 
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 

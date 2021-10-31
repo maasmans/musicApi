@@ -1,10 +1,17 @@
 package com.laszlo.musicApi.service;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.laszlo.musicApi.model.Artist;
+import com.laszlo.musicApi.model.JsonUtility;
 import com.laszlo.musicApi.model.Song;
 import com.laszlo.musicApi.repository.ArtistRepository;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +35,7 @@ public class ArtistService {
     public Artist save(Artist artist) {
         return artistRepository.save(artist);
     }
+
     public Iterable<Artist> saveAll(Iterable<Artist> artists) {
         return artistRepository.saveAll(artists);
     }
@@ -43,13 +51,16 @@ public class ArtistService {
         }
         return null;
     }
-
+    /**
+     * This one is a bit counter intuitive. You would expect that artists would have a genre. This is not the case so
+     * this method gets all the songs that have the specified genre and returns the matching artists.
+     */
     public List<Artist> artistsByGenre(String genre) {
         List<Song> songListFromGenre = songService.songsByGenre(genre);
         return songListFromGenre.stream()
                 .filter(song -> song.getArtist() != null)
                 .map(song -> songArtistMatcherByName(song))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public Artist songArtistMatcherByName(Song song) {
@@ -65,5 +76,35 @@ public class ArtistService {
             System.out.println("Artist with 'song' : '" + song.toString() + "' not found");
             return null;
         }
+    }
+
+    public void bulkInsert() {
+        Gson serialiser = new GsonBuilder()
+                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                .create();
+        Type targetClassType = new TypeToken<ArrayList<Artist>>() { }.getType();
+
+        String json = JsonUtility.readFileAsString(JsonUtility.ARTISTSPATH);
+        List<Artist> toInsert = serialiser.fromJson(json,targetClassType);
+        if(toInsert.size() > 0) {
+            toInsert.stream().forEach(x->x.setId(null));
+            artistRepository.saveAll(toInsert);
+        }
+    }
+
+    public void deleteById(Integer id) {
+        artistRepository.deleteById(id);
+    }
+
+    public Artist updateArtist(Integer id, Artist updatedArtist) {
+        Optional<Artist> optionalDbArtist = artistRepository.findById(id);
+        if(optionalDbArtist.isPresent()){
+            Artist dbArtist = optionalDbArtist.get();
+            if(updatedArtist.getName() != null){
+                dbArtist.setName(updatedArtist.getName());
+            }
+            return artistRepository.save(dbArtist);
+        }
+        return artistRepository.save(updatedArtist);
     }
 }

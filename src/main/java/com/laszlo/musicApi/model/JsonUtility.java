@@ -35,8 +35,15 @@ public class JsonUtility {
         return objectMapper.treeToValue(node, clazz);
     }
 
-    public static String readFileAsString(String file)throws Exception
+    public static String readFileAsString(String file)
     {
-        return new String(Files.readAllBytes(Paths.get(file)));
+        String content = "";
+        try{
+            content = new String(Files.readAllBytes(Paths.get(file)));
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return content;
     }
 }

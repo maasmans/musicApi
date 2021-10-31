@@ -9,10 +9,12 @@ import javax.persistence.Id;
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
     private String name;
 
-    public int getId() {
+    public void setId(Integer id) { this.id = id; }
+
+    public Integer getId() {
         return id;
     }
 
