@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -41,6 +42,12 @@ public class ArtistController {
     @PutMapping("/{id}")
     public Artist updateArtist(@PathVariable(value = "id") String id, @RequestBody Artist artist) {
         return artistService.updateArtist(Integer.valueOf(id), artist);
+    }
+
+    @GetMapping("/artistByName/{name}")
+    public List<Artist> getArtistsByName(@PathVariable(value = "name") String name){
+        List<Artist> artists = artistService.artistsByName(name);
+        return artists;
     }
 
     @GetMapping("/artistByGenre/{genre}")

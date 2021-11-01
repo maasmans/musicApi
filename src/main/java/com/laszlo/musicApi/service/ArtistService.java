@@ -33,8 +33,13 @@ public class ArtistService {
         return artistRepository.findAll();
     }
 
-    public Artist save(Artist artist) {
-        return artistRepository.save(artist);
+    public Artist save(Artist newArtist) {
+        String artistName = newArtist.getName();
+        boolean sameNameFound = findAll().stream().anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName));
+        if(sameNameFound){
+            return null;
+        }
+        return artistRepository.save(newArtist);
     }
 
     public Iterable<Artist> saveAll(Iterable<Artist> artists) {
@@ -90,13 +95,20 @@ public class ArtistService {
         artistRepository.deleteById(id);
     }
 
+    /**
+     * Here there is a check if the new artistName isn't already in the database. If not then the artist with the corresponding
+     * id will be updated. If the id doesn't match any artist in the database than the new entry will be saved.
+     */
     public Artist updateArtist(Integer id, Artist updatedArtist) {
+        String nameUpdated = updatedArtist.getName();
+        boolean sameNameFound = findAll().stream().anyMatch(artist -> artist.getName().equalsIgnoreCase(nameUpdated));
+        if(nameUpdated == null || sameNameFound){
+            return null;
+        }
         Optional<Artist> optionalDbArtist = artistRepository.findById(id);
         if(optionalDbArtist.isPresent()){
             Artist dbArtist = optionalDbArtist.get();
-            if(updatedArtist.getName() != null){
-                dbArtist.setName(updatedArtist.getName());
-            }
+            dbArtist.setName(nameUpdated);
             return artistRepository.save(dbArtist);
         }
         return artistRepository.save(updatedArtist);
