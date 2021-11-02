@@ -104,7 +104,9 @@ public class ArtistService {
      */
     public Artist updateArtist(Integer id, Artist updatedArtist) {
         String nameUpdated = updatedArtist.getName();
-        boolean sameNameFound = findAll().stream().anyMatch(artist -> artist.getName().equalsIgnoreCase(nameUpdated));
+        boolean sameNameFound = findAll().stream()
+                .filter(artist -> artist.getName() != null)
+                .anyMatch(artist -> artist.getName().equalsIgnoreCase(nameUpdated));
         if(nameUpdated == null || sameNameFound){
             return null;
         }
