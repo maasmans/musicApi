@@ -34,8 +34,10 @@ public class ArtistService {
     }
 
     public Artist save(Artist newArtist) {
-        String artistName = newArtist.getName();
-        boolean sameNameFound = findAll().stream().anyMatch(artist -> artist.getName().equalsIgnoreCase(artistName));
+        String newArtistName = newArtist.getName();
+        boolean sameNameFound = findAll().stream()
+                .filter(artist -> artist.getName() != null)
+                .anyMatch(artist -> artist.getName().equalsIgnoreCase(newArtistName));
         if(sameNameFound){
             return null;
         }

@@ -16,6 +16,7 @@ The database is easily manageable with SqlLiteStudio a database manager which ca
 Things to upgrade:
 - Implement response-entities
   - The api is now sometimes returns null values back to the user. This will be better if there is a clear reason why the api is returning nothing.
+- The api allows posting of objects with properties that are null. 
 - Create more unit tests to obtain more test coverage.
 - Make the application runnable through the created jar file in the target file.
 - All the other extra requirements possible :).
