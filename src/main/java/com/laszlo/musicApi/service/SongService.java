@@ -39,8 +39,7 @@ public class SongService {
     public List<Song> songsByGenre(String genre) {
         List<Song> songList = songRepository.findAll();
         return songList.stream()
-                .filter(song -> song.getGenre() != null)
-                .filter(song -> song.getGenre().equalsIgnoreCase(genre))
+                .filter(song -> genre.equalsIgnoreCase(song.getGenre()))
                 .collect(Collectors.toList());
     }
 

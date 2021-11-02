@@ -50,7 +50,7 @@ public class ArtistController {
         return artists;
     }
 
-    @GetMapping("/artistByGenre/{genre}")
+    @GetMapping("/artistsByGenre/{genre}")
     public Set<Artist> getArtistsByGenre(@PathVariable(value = "genre") String genre){
         Set<Artist> artists = artistService.artistsByGenre(genre);
         return artists;

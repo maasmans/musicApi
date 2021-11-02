@@ -47,6 +47,7 @@ class ArtistServiceTest {
 
         Set<Artist> matchingArtists = artistService.artistsByGenre(genre);
 
+        assertThat(matchingArtists).isNotEmpty();
         assertThat(matchingArtists).containsExactly(artistWithGenre);
     }
 

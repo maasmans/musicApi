@@ -51,8 +51,7 @@ public class ArtistService {
     }
 
     /**
-     * This one is a bit counter intuitive. You would expect that artists would have a genre. This is not the case so
-     * this method gets all the songs that have the specified genre and returns the matching artists.
+     * This method gets all the songs that have a specified genre and returns the matching artists.
      */
     public Set<Artist> artistsByGenre(String genre) {
         List<Song> songListFromGenre = songService.songsByGenre(genre);
@@ -63,12 +62,14 @@ public class ArtistService {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Now when an artist is not found it returns null, possible to if not found to create a new artist and then return.
+     */
     public Artist songArtistMatcherByName(Song song) {
         String artistNameOfSong = song.getArtist();
         List<Artist> artists = artistRepository.findAll();
         Optional<Artist> matchingArtist = artists.stream()
-                .filter(artist -> artist.getName() != null)
-                .filter(artist -> artistNameOfSong.toLowerCase().contains(artist.getName().toLowerCase()))
+                .filter(artist -> artistNameOfSong.equalsIgnoreCase(artist.getName()))
                 .findFirst();
         if (matchingArtist.isPresent()) {
             return matchingArtist.get();
