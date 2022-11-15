@@ -1,4 +1,4 @@
-package com.laszlo.musicApi;
+package com.laszlo.musicapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

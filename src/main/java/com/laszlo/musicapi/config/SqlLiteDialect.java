@@ -1,4 +1,4 @@
-package com.laszlo.musicApi.config;
+package com.laszlo.musicapi.config;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;

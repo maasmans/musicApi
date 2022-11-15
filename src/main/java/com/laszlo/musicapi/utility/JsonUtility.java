@@ -1,4 +1,4 @@
-package com.laszlo.musicApi.utility;
+package com.laszlo.musicapi.utility;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

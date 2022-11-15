@@ -1,9 +1,9 @@
-package com.laszlo.musicApi.service;
+package com.laszlo.musicapi.service;
 
-import com.laszlo.musicApi.model.Artist;
-import com.laszlo.musicApi.model.Song;
-import com.laszlo.musicApi.repository.ArtistRepository;
-import com.laszlo.musicApi.repository.SongRepository;
+import com.laszlo.musicapi.model.Artist;
+import com.laszlo.musicapi.model.Song;
+import com.laszlo.musicapi.repository.ArtistRepository;
+import com.laszlo.musicapi.repository.SongRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;

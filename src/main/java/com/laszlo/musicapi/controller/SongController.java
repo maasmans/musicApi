@@ -1,7 +1,7 @@
-package com.laszlo.musicApi.controller;
+package com.laszlo.musicapi.controller;
 
-import com.laszlo.musicApi.model.Song;
-import com.laszlo.musicApi.service.SongService;
+import com.laszlo.musicapi.model.Song;
+import com.laszlo.musicapi.service.SongService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

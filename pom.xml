@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.laszlo</groupId>
-	<artifactId>musicApi</artifactId>
+	<artifactId>musicapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>musicApi</name>
+	<name>musicapi</name>
 	<description>A little project for rockstars</description>
 	<properties>
 		<java.version>11</java.version>

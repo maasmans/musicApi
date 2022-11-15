@@ -1,6 +1,6 @@
-package com.laszlo.musicApi.repository;
+package com.laszlo.musicapi.repository;
 
-import com.laszlo.musicApi.model.Song;
+import com.laszlo.musicapi.model.Song;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

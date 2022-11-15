@@ -1,13 +1,13 @@
-package com.laszlo.musicApi.service;
+package com.laszlo.musicapi.service;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.laszlo.musicApi.model.Artist;
-import com.laszlo.musicApi.model.Song;
-import com.laszlo.musicApi.repository.ArtistRepository;
-import com.laszlo.musicApi.utility.JsonUtility;
+import com.laszlo.musicapi.model.Artist;
+import com.laszlo.musicapi.model.Song;
+import com.laszlo.musicapi.repository.ArtistRepository;
+import com.laszlo.musicapi.utility.JsonUtility;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;

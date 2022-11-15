@@ -1,4 +1,4 @@
-package com.laszlo.musicApi.model;
+package com.laszlo.musicapi.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
